@@ -16,13 +16,14 @@
 
 
     <!-- SIDEBAR -->
-    <section id="sidebar" class="fixed top-0 left-0 w-72 h-full bg-white dark:bg-gray-800 z-50 transition-all duration-300">
+    <section id="sidebar"
+        class="fixed top-0 left-0 w-72 h-full bg-white dark:bg-gray-800 z-50 transition-all duration-300">
         <a href="#" class="block text-center py-4 text-xl font-bold text-blue-600 dark:text-blue-400">Visitor</a>
         <ul class="space-y-2 mt-6">
-            <li class="px-4 py-2 bg-gray-200 rounded-r-full">
+            <li class="px-4 py-2 bg-gray-200 dark:bg-white rounded-r-full">
                 <a href="#" class="flex items-center space-x-2">
-                    <i class='bx bxs-dashboard'></i>
-                    <span>Dashboard</span>
+                    <i class='bx bxs-dashboard dark:text-black'></i>
+                    <span class="dark:text-black" >Dashboard</span>
                 </a>
             </li>
             <li class="px-4 py-2 hover:bg-gray-200 rounded-r-full">
@@ -38,12 +39,14 @@
     <!-- CONTENT -->
     <section id="content" class="ml-72 p-6">
         <!-- NAVBAR -->
-        <nav class="bg-white p-4 shadow flex items-center dark:text-black">
-            <i class='bx bx-menu text-xl cursor-pointer'></i>
-            <a href="#" class="ml-4 dark:text-black">Get all your performance here</a>
-            <input type="checkbox" id="switch-mode" class="hidden">
-            <label for="switch-mode" class="ml-auto cursor-pointer w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full relative">
-                <span class="absolute w-6 h-6 bg-blue-600 rounded-full left-0 transition-transform transform"></span>
+        <nav class="bg-white p-4 shadow flex items-center justify-between dark:text-black">
+            <div class="flex items-center">
+                <i class='bx bx-menu text-xl cursor-pointer'></i>
+                <a href="#" class="ml-4 dark:text-black">Get all your performance here</a>
+            </div>
+            <label class="inline-flex items-center cursor-pointer ml-auto">
+                <input id="switch-mode" type="checkbox" value="" class="sr-only peer">
+                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
         </nav>
         <!-- NAVBAR -->
@@ -60,28 +63,28 @@
             <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-instagram text-4xl bg-pink-100 text-pink-600 p-2 rounded-full'></i>
-                    <div class="dark:text-black" >
+                    <div class="dark:text-black">
                         <h3 class="text-2xl font-bold">1020</h3>
                         <p>Instagram</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-whatsapp text-4xl bg-green-100 text-green-600 p-2 rounded-full'></i>
-                    <div class="dark:text-black" >
+                    <div class="dark:text-black">
                         <h3 class="text-2xl font-bold">2834</h3>
                         <p>Whatsapp</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-tiktok text-4xl bg-black text-white p-2 rounded-full'></i>
-                    <div class="dark:text-black" >
+                    <div class="dark:text-black">
                         <h3 class="text-2xl font-bold">2543</h3>
                         <p>Tiktok</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-youtube text-4xl bg-red-100 text-red-600 p-2 rounded-full'></i>
-                    <div class="dark:text-black" >
+                    <div class="dark:text-black">
                         <h3 class="text-2xl font-bold">2543</h3>
                         <p>Youtube</p>
                     </div>
@@ -175,7 +178,7 @@
                 labels: ['Instagram', 'Whatsapp', 'Youtube'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [10, 5, 7],
+                    data: [10, 15, 7],
                     backgroundColor: [
                         'rgb(255, 51, 0)',   // Oranye cerah
                         'rgba(0, 255, 0, 1)',    // Hijau
