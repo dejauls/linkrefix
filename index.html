@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="dist/output.css" rel="stylesheet">
+    <title>Hello!</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+<body class="bg-gray-100">
+
+
+    <!-- SIDEBAR -->
+    <section id="sidebar" class="fixed top-0 left-0 w-72 h-full bg-white z-50 transition-all duration-300">
+        <a href="#" class="block text-center py-4 text-xl font-bold text-blue-600">Visitor</a>
+        <ul class="space-y-2 mt-6">
+            <li class="px-4 py-2 bg-gray-200 rounded-r-full">
+                <a href="#" class="flex items-center space-x-2">
+                    <i class='bx bxs-dashboard'></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="px-4 py-2 hover:bg-gray-200 rounded-r-full">
+                <a href="#" class="flex items-center space-x-2">
+                    <i class='bx bxs-doughnut-chart'></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content" class="ml-72 p-6">
+        <!-- NAVBAR -->
+        <nav class="bg-white p-4 shadow flex items-center">
+            <i class='bx bx-menu text-xl cursor-pointer'></i>
+            <a href="#" class="ml-4">Get all your performance here</a>
+            <input type="checkbox" id="switch-mode" class="hidden">
+            <label for="switch-mode" class="ml-auto cursor-pointer w-12 h-6 bg-gray-300 rounded-full relative">
+                <span class="absolute w-6 h-6 bg-blue-600 rounded-full left-0 transition-transform transform"></span>
+            </label>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main class="mt-6">
+            <div class="mb-6">
+                <h1 class="text-3xl font-bold">Dashboard</h1>
+                <ul class="flex space-x-2 text-gray-600">
+                    <li>Dashboard</li>
+                </ul>
+            </div>
+
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bxl-instagram text-4xl bg-pink-100 text-pink-600 p-2 rounded-full'></i>
+                    <div>
+                        <h3 class="text-2xl font-bold">1020</h3>
+                        <p>Instagram</p>
+                    </div>
+                </li>
+                <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bxl-whatsapp text-4xl bg-green-100 text-green-600 p-2 rounded-full'></i>
+                    <div>
+                        <h3 class="text-2xl font-bold">2834</h3>
+                        <p>Whatsapp</p>
+                    </div>
+                </li>
+                <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bxl-tiktok text-4xl bg-black text-white p-2 rounded-full'></i>
+                    <div>
+                        <h3 class="text-2xl font-bold">2543</h3>
+                        <p>Tiktok</p>
+                    </div>
+                </li>
+                <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bxl-youtube text-4xl bg-red-100 text-red-600 p-2 rounded-full'></i>
+                    <div>
+                        <h3 class="text-2xl font-bold">2543</h3>
+                        <p>Youtube</p>
+                    </div>
+                </li>
+                <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bxl-chrome text-4xl bg-blue-100 text-blue-600 p-2 rounded-full'></i>
+                    <div>
+                        <h3 class="text-2xl font-bold">2543</h3>
+                        <p>Website</p>
+                    </div>
+                </li>
+                <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bxs-file-archive text-4xl bg-gray-100 text-gray-600 p-2 rounded-full'></i>
+                    <div>
+                        <h3 class="text-2xl font-bold">2543</h3>
+                        <p>Berita</p>
+                    </div>
+                </li>
+                <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bx-task text-4xl bg-yellow-100 text-yellow-600 p-2 rounded-full'></i>
+                    <div>
+                        <h3 class="text-2xl font-bold">2543</h3>
+                        <p>Why Reclea</p>
+                    </div>
+                </li>
+            </ul>
+
+            <div id="chart" class="mt-6">
+                <canvas id="barChart"></canvas>
+            </div>
+
+            <div class="mt-6">
+                <div class="bg-white p-4 shadow rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-bold">Chart</h3>
+                        <div class="flex space-x-2">
+                            <i class='bx bx-plus cursor-pointer'></i>
+                            <i class='bx bx-filter cursor-pointer'></i>
+                        </div>
+                    </div>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-center justify-between bg-gray-100 p-2 rounded">
+                            <p></p>
+                            <i class='bx bx-dots-vertical-rounded cursor-pointer'></i>
+                        </li>
+                        <li class="flex items-center justify-between bg-gray-100 p-2 rounded">
+                            <p></p>
+                            <i class='bx bx-dots-vertical-rounded cursor-pointer'></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+
+    <script src="script.js"></script>
+    <script>
+        var options = {
+            series: [{
+                data: [400, 448, 540, 580, 690, 1200, 1380]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    borderRadiusApplication: 'end',
+                    horizontal: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: ['Instagram', 'Whatsapp', 'Youtube', 'tiktok', 'berita', 'website', 'why reclea'],
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+    <script>
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Instagram', 'Whatsapp', 'Youtube'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [10, 5, 7],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
