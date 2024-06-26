@@ -60,7 +60,7 @@
                 </ul>
             </div>
 
-            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-instagram text-4xl bg-pink-100 text-pink-600 p-2 rounded-full'></i>
                     <div class="dark:text-black">
@@ -111,10 +111,12 @@
                     </div>
                 </li>
             </ul>
-
-            <div id="chart" class="mt-6">
-                <canvas id="barChart"></canvas>
+            <div class="flex max-w-500px max-h-300px">
+                <div id="chart" class="mt-6 flex-1 h-full">
+                    <canvas id="barChart" class="w-full h-full"></canvas>
+                </div>
             </div>
+            
 
             <div class="mt-6">
                 <div class="bg-white p-4 shadow rounded-lg">
