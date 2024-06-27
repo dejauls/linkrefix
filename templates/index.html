@@ -78,49 +78,50 @@
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-instagram text-4xl bg-pink-100 text-pink-600 p-2 rounded-full'></i>
                     <div class="dark:text-black">
-                        <h3 class="text-2xl font-bold">1020</h3>
+                        <h3 class="text-2xl font-bold" id="instagramCount">Loading...</h3>
                         <p>Instagram</p>
                     </div>
                 </li>
+                
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-whatsapp text-4xl bg-green-100 text-green-600 p-2 rounded-full'></i>
                     <div class="dark:text-black">
-                        <h3 class="text-2xl font-bold">2834</h3>
+                        <h3 class="text-2xl font-bold" id="whatsappCount">Loading...</h3>
                         <p>Whatsapp</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-tiktok text-4xl bg-black text-white p-2 rounded-full'></i>
                     <div class="dark:text-black">
-                        <h3 class="text-2xl font-bold">2543</h3>
+                        <h3 class="text-2xl font-bold" id="tiktokCount">Loading...</h3>
                         <p>Tiktok</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-youtube text-4xl bg-red-100 text-red-600 p-2 rounded-full'></i>
                     <div class="dark:text-black">
-                        <h3 class="text-2xl font-bold">2543</h3>
+                        <h3 class="text-2xl font-bold" id="youtubeCount">Loading...</h3>
                         <p>Youtube</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-chrome text-4xl bg-blue-100 text-blue-600 p-2 rounded-full'></i>
                     <div class="dark:text-black">
-                        <h3 class="text-2xl font-bold">2543</h3>
+                        <h3 class="text-2xl font-bold" id="websiteCount">Loading...</h3>
                         <p>Website</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxs-file-archive text-4xl bg-gray-100 text-gray-600 p-2 rounded-full'></i>
                     <div class="dark:text-black">
-                        <h3 class="text-2xl font-bold">2543</h3>
+                        <h3 class="text-2xl font-bold" id="beritaCount">Loading...</h3>
                         <p>Berita</p>
                     </div>
                 </li>
                 <li class="bg-white p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bx-task text-4xl bg-yellow-100 text-yellow-600 p-2 rounded-full'></i>
                     <div class="dark:text-black">
-                        <h3 class="text-2xl font-bold">2543</h3>
+                        <h3 class="text-2xl font-bold" id="artikelCount">Loading...</h3>
                         <p>Why Reclea</p>
                     </div>
                 </li>
@@ -129,7 +130,7 @@
                 <div class="flex flex-row  h-full mt-10">
                     <!-- Div di kiri -->
                     <div id="left" class="w-2/3 p-4 shadow rounded-lg bg-white dark:bg-gray-600  h-full flex">
-                        <canvas id="barChart" class="w-full h-full "></canvas>
+                        <canvas id="dailyChart" class="w-full h-full "></canvas>
                     </div>
                     <!-- Div di kanan -->
                     <div id="chart" class="w-1/3 p-4">
@@ -160,16 +161,13 @@
                         <h2 class="text-lg font-semibold mb-2">Berikut data mingguan</h2>
                         <canvas id="weeklyChart" class="w-full"></canvas>
                     </div>
-            
-                    <div class="bg-white dark:bg-gray-600 shadow-lg rounded-lg p-6">
+                    <!-- <div class="bg-white dark:bg-gray-600 shadow-lg rounded-lg p-6">
                         <h2 class="text-lg font-semibold mb-2">Berikut data harian</h2>
                         <canvas id="dailyChart" class="w-full"></canvas>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             
-            
-
 
             <div class="mt-6">
                 <div class="bg-white p-4 shadow rounded-lg">
@@ -198,6 +196,64 @@
     <!-- CONTENT -->
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/instagram_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('instagramCount').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/whatsapp_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('whatsappCount').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/tiktok_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('tiktokCount').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/youtube_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('youtubeCount').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/website_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('websiteCount').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/berita_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('beritaCount').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/artikel_count')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('artikelCount').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             fetch('/data_month')
@@ -261,22 +317,22 @@
                             platformCounts.website
                         ],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
+                            'rgb(255, 51, 0)',   
+                            'rgba(18, 161, 49, 0.9)',
+                            'rgba(34, 40, 34, 1.0)',
+                            'rgba(210, 38, 30, 1.0)',
+                            'rgba(95, 150, 198, 0.9)',
+                            'rgba(85, 86, 47, 0.75)',
+                            'rgba(107, 184, 35, 1.0)'
                         ],
                         borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
+                            'rgb(255, 51, 0)',   
+                            'rgba(0, 255, 0, 1)',
+                            'rgba(34, 40, 34, 1.0)',
+                            'rgba(210, 38, 30, 1.0)',
+                            'rgba(95, 150, 198, 0.9)',
+                            'rgba(85, 86, 47, 0.75)',
+                            'rgba(107, 184, 35, 1.0)'
                         ],
                         borderWidth: 1
                     }]
@@ -307,10 +363,10 @@
                         label: '# of Votes',
                         data: [10, 15, 7, 9, 22, 7, 3],
                         backgroundColor: [
-                            'rgb(255, 51, 0)',   // Oranye cerah
+                            'rgb(255, 51, 0)',   
                             'rgba(0, 255, 0, 1)',    // Hijau
                             'rgba(204, 0, 0, 1)',   // Merah
-                            'rgb(255, 51, 0)',   // Oranye cerah
+                            'rgb(255, 51, 0)',   
                             'rgba(0, 255, 0, 1)',    // Hijau
                             'rgba(204, 0, 0, 1)',   // Merah
                             'rgba(0, 255, 0, 1)'   // Hijau
@@ -319,7 +375,7 @@
                             'rgba(255, 165, 0, 1)',  // Oranye
                             'rgba(0, 255, 0, 1)',    // Hijau
                             'rgba(204, 0, 0, 1)',   // Merah
-                            'rgb(255, 51, 0)',   // Oranye cerah
+                            'rgb(255, 51, 0)',   
                             'rgba(0, 255, 0, 1)',    // Hijau
                             'rgba(204, 0, 0, 1)',   // Merah
                             'rgba(0, 255, 0, 1)'   // Hijau

@@ -76,6 +76,69 @@ def data_week():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500    
+    
+@app.route('/instagram_count', methods=['GET'])
+def instagram_count():
+    try:
+        count = db.link.count_documents({'platform': 'instagram'})
+        return jsonify({'count': count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500    
+    
+@app.route('/whatsapp_count', methods=['GET'])
+def whatsapp_count():
+    try:
+        count = db.link.count_documents({'platform': 'whatsapp'})
+        return jsonify({'count': count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500   
+
+@app.route('/tiktok_count', methods=['GET'])
+def tiktok_count():
+    try:
+        count = db.link.count_documents({'platform': 'tiktok'})
+        return jsonify({'count': count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500        
+
+@app.route('/youtube_count', methods=['GET'])
+def youtube_count():
+    try:
+        count = db.link.count_documents({'platform': 'youtube'})
+        return jsonify({'count': count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+
+@app.route('/website_count', methods=['GET'])
+def website_count():
+    try:
+        count = db.link.count_documents({'platform': 'website'})
+        return jsonify({'count': count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+
+@app.route('/berita_count', methods=['GET'])
+def berita_count():
+    try:
+        count = db.link.count_documents({'platform': 'berita'})
+        return jsonify({'count': count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+
+@app.route('/artikel_count', methods=['GET'])
+def artikel_count():
+    try:
+        count = db.link.count_documents({'platform': 'artikel'})
+        return jsonify({'count': count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
