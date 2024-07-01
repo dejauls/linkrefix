@@ -11,6 +11,10 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/view')
+def view():
+    return render_template('view.html')
+
 @app.route("/link", methods=["POST"])
 def link_post():
     try:
@@ -54,6 +58,8 @@ def data_today():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500    
+    
+
     
 @app.route('/data_month', methods=['GET'])
 def data_month():
@@ -139,6 +145,76 @@ def artikel_count():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+    
+@app.route('/data_range', methods=['GET'])
+def data_range():
+    try:
+        start_date = request.args.get('start')
+        end_date = request.args.get('end')
+        
+        if not start_date or not end_date:
+            return jsonify({'msg': 'Start date and end date are required'}), 400
+        
+        start_date_obj = datetime.strptime(start_date, '%Y-%m-%d')
+        end_date_obj = datetime.strptime(end_date, '%Y-%m-%d') + timedelta(days=1)
+        
+        platforms = ['instagram', 'whatsapp', 'tiktok', 'youtube', 'website', 'berita', 'artikel']
+        counts = {}
+
+        for platform in platforms:
+            count = db.link.count_documents({
+                'platform': platform,
+                'timestamp': {'$gte': start_date, '$lt': end_date_obj.strftime('%Y-%m-%d')}
+            })
+            counts[platform] = count
+        
+        return jsonify(counts)
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+
+def get_month_data(year, month):
+    num_days = monthrange(year, month)[1]
+    start_date = datetime(year, month, 1).strftime('%Y-%m-%d')
+    end_date = datetime(year, month, num_days).strftime('%Y-%m-%d')
+
+    pipeline = [
+        {"$match": {
+            "timestamp": {"$gte": start_date, "$lte": end_date},
+            "platform": {"$exists": True, "$ne": ""}
+        }},
+        {"$group": {
+            "_id": {"platform": "$platform", "date": "$timestamp"},
+            "count": {"$sum": 1}
+        }}
+    ]
+
+    data = list(db.link.aggregate(pipeline))
+
+    # Prepare chart data structure
+    chart_data = {}
+
+    # Initialize data structure with all days of the month
+    for platform in ['artikel', 'berita', 'instagram', 'tiktok', 'website', 'whatsapp', 'youtube']:
+        chart_data[platform] = {
+            'labels': [datetime(year, month, day).strftime('%Y-%m-%d') for day in range(1, num_days + 1)],
+            'data': [0] * num_days
+        }
+
+    # Fill data from MongoDB results
+    for entry in data:
+        platform = entry['_id'].get('platform')
+        if not platform:
+            continue
+
+        date = entry['_id']['date']
+        count = entry['count']
+
+        if date in chart_data[platform]['labels']:
+            index = chart_data[platform]['labels'].index(date)
+            chart_data[platform]['data'][index] = count
+
+    return chart_data    
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
