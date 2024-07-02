@@ -1,9 +1,17 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import os
+import pytz
 
-client = MongoClient('mongodb://belajar:belajar@ac-pewhlve-shard-00-00.m1k88nt.mongodb.net:27017,ac-pewhlve-shard-00-01.m1k88nt.mongodb.net:27017,ac-pewhlve-shard-00-02.m1k88nt.mongodb.net:27017/?ssl=true&replicaSet=atlas-i3tctf-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0')
-db = client.linkc
+load_dotenv()  # Memuat variabel dari .env
+
+MONGODB_URI = os.getenv('MONGODB_URI')
+DB_NAME = os.getenv('DB_NAME')
+
+client = MongoClient(MONGODB_URI)
+db = client[DB_NAME]
 
 app = Flask(__name__)
 
@@ -28,11 +36,11 @@ def link_post():
         }
 
         result = db.link.insert_one(doc)
-        print(f"Document inserted with id: {result.inserted_id}")  # Debug: Print insertion result
+        print(f"Document inserted with id: {result.inserted_id}") 
 
         return jsonify({'msg': 'POST request received!'})
     except Exception as e:
-        print(f"Error: {e}")  # Debug: Print any error that occurs
+        print(f"Error: {e}") 
         return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
 
 @app.route('/view_data', methods=['GET'])

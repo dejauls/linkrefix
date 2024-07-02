@@ -21,7 +21,8 @@
 
     .list-container ul {
         flex: 1;
-        min-width: 200px; /* Atur min-width sesuai kebutuhan */
+        min-width: 200px;
+        /* Atur min-width sesuai kebutuhan */
     }
 
     .list-container li {
@@ -31,11 +32,71 @@
 </style>
 
 <body class="bg-white text-black dark:bg-gray-800 dark:text-white transition duration-300">
+    <header class="fixed absolute z-99999999999999999 bg-gradient-to-b from-black via-gray-700 to-transparent md:hidden ">
+        <nav class="fixed z-50 md:z-auto bg-gradient-to-b from-black via-gray-800/60 to-transparent md:static flex p-5 md:p-20 justify-between items-center w-full gap-5 "
+            data-aos="zoom-y-out">
+            <!-- // backdrop-blur-md md:backdrop-blur-none // -->
+            <label for="check-mobilenav" class="flex flex-col min-w-10 max-w-20 cursor-pointer md:hidden">
+                <input type="checkbox" id="check-mobilenav" class="peer hidden" />
+                <span
+                    class="bg-stone-100 rounded-[10px] h-[3.5px] sm:h-[5px] my-[3px] sm:my-[5px] transition-transform duration-[0.4s] ease-custom w-1/2 peer-checked:origin-bottom peer-checked:rotate-45 peer-checked:translate-x-[8px]"></span>
+                <span
+                    class="bg-stone-100 rounded-[10px] h-[3.5px] sm:h-[5px] my-[3px] sm:my-[5px] transition-transform duration-[0.4s] ease-custom w-full peer-checked:origin-top peer-checked:-rotate-45"></span>
+                <span
+                    class="bg-stone-100 rounded-[10px] h-[3.5px] sm:h-[5px] my-[3px] sm:my-[5px] transition-transform duration-[0.4s] ease-custom w-3/4 peer-checked:origin-bottom peer-checked:w-1/2 peer-checked:translate-x-[30px] peer-checked:-translate-y-[11px] peer-checked:rotate-45"></span>
+            </label>
 
+            <div id="brand"
+                class="text-3xl font-bold font-montserrat text-stone-900 flex items-center transform transition duration-300 ease-in-out hover:scale-110 md:hidden">
+                <a href="" class="flex items-center">
+                    <img src="/static/img/logobar.png" alt="Reclea Brick Logo" class="max-w-24 sm:max-w-32 shadow-lg" />
+                    <span class="sr-only">Reclea Brick</span>
+                </a>
+            </div>
+
+        </nav>
+
+        <div id="offscreen-nav-container"
+            class="fixed top-0 left-0 w-screen h-svh bg-stone-900 z-10 flex flex-col justify-between -translate-x-full md:hidden duration-300">
+            <div class="flex flex-col gap-10 p-5">
+                <div class="flex justify-between text-white">
+                    <div class=""></div>
+                    <div class=""></div>
+                </div>
+                <ul class="flex flex-col gap-5 p-5">
+                    <li href="javascript:void(0)" class="relative group">
+                        <a href="/"
+                            class="font-semibold text-stone-300 group-hover:text-stone-200 text-xl duration-300">
+                            DASHBOARD
+                        </a>
+                        <div
+                            class="absolute -bottom-2 left-0 w-0 duration-500 group-hover:w-full h-1 group-hover:bg-stone-200 bg-stone-100">
+                        </div>
+                    </li>
+                    <li href="javascript:void(0)" class="relative group">
+                        <a href="/view"
+                            class="font-semibold text-stone-300 group-hover:text-stone-200 text-xl duration-300">
+                            WEB SAYA 
+                        </a>
+                        <div
+                            class="absolute -bottom-2 left-0 w-0 duration-500 group-hover:w-full h-1 group-hover:bg-stone-200 bg-stone-100">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div
+                class="text-white text-xs font-light md:font-normal md:text-base text-center p-5 border-t border-stone-600 ">
+                CopyRight &copy; 2024 Recleabrick. All Rights Reserved designed by
+                <a href="https://www.instagram.com/ninjafly.id/"
+                    class="underline italic transition-transform duration-300 hover:scale-110 hover:text-red-700">Ninjafly.id</a>
+            </div>
+        </div>
+
+    </header>
 
     <!-- SIDEBAR -->
     <section id="sidebar"
-        class="flex flex-col fixed top-0 pt-8 left-0 w-72 h-svh bg-gradient-to-tl from-black via-gray-900 to-black z-50 transition-all duration-300 hidden md:flex">
+        class="flex flex-col  fixed top-0 pt-8 left-0 w-72 h-svh bg-gradient-to-tl from-black via-gray-900 to-black z-50 transition-all duration-300 hidden md:flex">
 
         <ul class="space-y-4">
             <li>
@@ -396,8 +457,8 @@
         }
 
         function updatePlatformList(listId, platformCounts) {
-        const list = document.getElementById(listId);
-        list.innerHTML = `
+            const list = document.getElementById(listId);
+            list.innerHTML = `
             <ul>
                 <li>Instagram : ${platformCounts.instagram}</li>
                 <li>WhatsApp : ${platformCounts.whatsapp}</li>
@@ -410,7 +471,7 @@
                 <li>Website : ${platformCounts.website}</li>
             </ul>
         `;
-    }
+        }
     </script>
 
     <!-- <script>
@@ -496,7 +557,7 @@
         var observer = new MutationObserver(toggleDarkMode);
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     </script> -->
-    <script>
+    <!-- <script>
         function createChart(isDarkMode) {
             // Replace this with your actual chart creation code
             console.log("Chart created with dark mode: " + isDarkMode);
@@ -532,9 +593,74 @@
                 htmlElement.classList.remove('dark');
             }
         });
-    </script>
+    </script> -->
 
     <script src="/static/particles.js"></script>
+
+    <!-- <script type='text/javascript'>
+        //<![CDATA[
+        function redirect1(e) {
+            if ((e.ctrlKey && e.which == 85) || (e.ctrlKey && e.which == 123) || (e.key == "F12") || (e.key == "F12" && e.code.startsWith("F"))) {
+                // Jika tombol Control (Ctrl) dan tombol 'U' (kode tombol 85) 
+                // atau tombol Control (Ctrl) dan tombol F12 (kode tombol 123) ditekan bersamaan
+                alert("BERANI BERUBAH MENJADI LEBIH BAIK");
+                return false; // Menghentikan aksi default dari event
+            }
+        }
+
+        function redirect2(e) {
+            if (e.which == 3) {
+                // Jika tombol kanan mouse (kode tombol 3) ditekan (klik kanan)
+                alert("BERANI BERUBAH MENJADI LEBIH BAIK");
+                return false; // Menghentikan aksi default dari event
+            }
+        }
+
+        document.onkeydown = redirect1; // Memanggil fungsi redirect1 saat event keydown terjadi
+        document.oncontextmenu = redirect2; // Memanggil fungsi redirect2 saat event contextmenu terjadi
+        //]]>
+    </script> -->
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            AOS.init();
+
+            const checkbox = document.getElementById("check-mobilenav");
+            const navContainer = document.getElementById("offscreen-nav-container");
+
+            checkbox.addEventListener("change", function () {
+                if (this.checked) {
+                    navContainer.classList.remove("-translate-x-full");
+                    navContainer.classList.add("translate-x-0");
+                } else {
+                    navContainer.classList.remove("translate-x-0");
+                    navContainer.classList.add("-translate-x-full");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        const toggleSideNav = (isOpen) => {
+            const checkbox = document.getElementById('check-mobilenav');
+            checkbox.checked = isOpen;
+            const navContainer = document.getElementById('offscreen-nav-container');
+
+            navContainer.classList.toggle('-translate-x-full', !isOpen);
+            navContainer.classList.toggle('translate-x-0', isOpen);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init();
+
+            const checkbox = document.getElementById('check-mobilenav');
+
+            checkbox.addEventListener('change', () => {
+                toggleSideNav(checkbox.checked);
+            });
+        });
+    </script>
 
 
 </body>
