@@ -149,7 +149,7 @@
         <!-- NAVBAR -->
 
         <!-- MAIN -->
-        <main class="mt-6 ml-4">
+        <main class="mt-6 ml-2 md:ml-4">
             <div class="mb-6 p-4 max-w-fit rounded-md justify-center mx-auto">
                 <h1 class="text-4xl text-white font-bold">Dashboard</h1>
                 <ul class="flex space-x-2 text-white justify-center mx-auto">
@@ -161,53 +161,53 @@
                 <h2>Total Performance :</h2>
             </div>
 
-            <ul class="relative grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <li class="bg-zinc-100 p-4 flex items-center space-x-4 shadow-3xl rounded-lg">
+            <ul class="relative grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2">
+                <li class="bg-zinc-100 p-1 md:p-4 flex items-center space-x-4 shadow-3xl rounded-lg">
                     <i class='bx bxl-instagram text-4xl bg-pink-100 text-pink-600 p-2 rounded-full'></i>
-                    <div class="text-black  ">
+                    <div class="text-black mr-4 ">
                         <h3 class="text-2xl font-bold" id="instagramCount">Loading...</h3>
                         <p>Instagram</p>
                     </div>
                 </li>
 
-                <li class="bg-zinc-100 p-4 flex items-center space-x-4 shadow rounded-lg">
+                <li class="bg-zinc-100 p-1 md:p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-whatsapp text-4xl bg-green-100 text-green-600 p-2 rounded-full'></i>
-                    <div class="text-black  ">
+                    <div class="text-black mr-4  ">
                         <h3 class="text-2xl font-bold" id="whatsappCount">Loading...</h3>
                         <p>Whatsapp</p>
                     </div>
                 </li>
-                <li class="bg-zinc-100 p-4 flex items-center space-x-4 shadow rounded-lg">
-                    <i class='bx bxl-tiktok text-4xl bg-black text-white p-2 rounded-full'></i>
-                    <div class="text-black ">
+                <li class="bg-zinc-100 p-1 md:p-4 flex items-center space-x-4 shadow rounded-lg">
+                    <i class='bx bxl-tiktok text-4xl bg-black text-white p-2 rounded-full sm md:normal'></i>
+                    <div class="text-black mr-4 ">
                         <h3 class="text-2xl font-bold" id="tiktokCount">Loading...</h3>
                         <p>Tiktok</p>
                     </div>
                 </li>
-                <li class="bg-zinc-100 p-4 flex items-center space-x-4 shadow rounded-lg">
+                <li class="bg-zinc-100 p-1 md:p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-youtube text-4xl bg-red-100 text-red-600 p-2 rounded-full'></i>
-                    <div class="text-black ">
+                    <div class="text-black mr-4  ">
                         <h3 class="text-2xl font-bold" id="youtubeCount">Loading...</h3>
                         <p>Youtube</p>
                     </div>
                 </li>
-                <li class="bg-zinc-100 p-4 flex items-center space-x-4 shadow rounded-lg">
+                <li class="bg-zinc-100 p-1 md:p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxl-chrome text-4xl bg-blue-100 text-blue-600 p-2 rounded-full'></i>
-                    <div class="text-black">
+                    <div class="text-black mr-4 ">
                         <h3 class="text-2xl font-bold" id="websiteCount">Loading...</h3>
                         <p>Website</p>
                     </div>
                 </li>
-                <li class="bg-zinc-100 p-4 flex items-center space-x-4 shadow rounded-lg">
+                <li class="bg-zinc-100 p-1 md:p-4 flex items-center space-x-4 shadow rounded-lg">
                     <i class='bx bxs-file-archive text-4xl bg-gray-100 text-gray-600 p-2 rounded-full'></i>
-                    <div class="text-black ">
+                    <div class="text-black mr-4  ">
                         <h3 class="text-2xl font-bold" id="beritaCount">Loading...</h3>
                         <p>Berita</p>
                     </div>
                 </li>
-                <li class=" bg-zinc-100 p-4 flex items-center space-x-4 shadow-lg shadow-amber-600 rounded-lg">
+                <li class=" bg-zinc-100 p-1 md:p-4 flex items-center space-x-4 shadow-lg shadow-amber-600 rounded-lg">
                     <i class='bx bx-task text-4xl bg-yellow-100 text-yellow-600 p-2 rounded-full'></i>
-                    <div class="text-black ">
+                    <div class="text-black mr-4  ">
                         <h3 class="text-2xl font-bold" id="artikelCount">Loading...</h3>
                         <p>Why Reclea</p>
                     </div>
@@ -342,6 +342,137 @@
                 })
                 .catch(error => console.error('Error:', error));
         });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/data_month')
+                .then(response => response.json())
+                .then(data => {
+                    const platformCounts = getPlatformCounts(data);
+                    renderChart('monthChart', platformCounts);
+                    updatePlatformList('monthList', platformCounts);
+                })
+                .catch(error => console.error('Error:', error));
+
+            fetch('/data_week')
+                .then(response => response.json())
+                .then(data => {
+                    const platformCounts = getPlatformCounts(data);
+                    renderChart('weeklyChart', platformCounts);
+                    updatePlatformList('weekList', platformCounts);
+                })
+                .catch(error => console.error('Error:', error));
+
+            fetch('/data_today')
+                .then(response => response.json())
+                .then(data => {
+                    const platformCounts = getPlatformCounts(data);
+                    renderChart('dailyChart', platformCounts);
+                    updatePlatformList('dayList', platformCounts);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        function getPlatformCounts(data) {
+            const counts = {
+                instagram: 0,
+                whatsapp: 0,
+                tiktok: 0,
+                youtube: 0,
+                artikel: 0,
+                berita: 0,
+                website: 0
+            };
+            data.forEach(item => {
+                if (counts[item.platform] !== undefined) {
+                    counts[item.platform]++;
+                }
+            });
+            return counts;
+        }
+
+        function renderChart(chartId, platformCounts) {
+            const ctx = document.getElementById(chartId).getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Instagram', 'WhatsApp', 'TikTok', 'YouTube', 'Artikel', 'Berita', 'Website'],
+                    datasets: [{
+                        data: [
+                            platformCounts.instagram,
+                            platformCounts.whatsapp,
+                            platformCounts.tiktok,
+                            platformCounts.youtube,
+                            platformCounts.artikel,
+                            platformCounts.berita,
+                            platformCounts.website
+                        ],
+                        backgroundColor: [
+                            'rgb(255, 51, 0)',
+                            'rgba(18, 161, 49, 0.9)',
+                            'rgba(34, 40, 34, 1.0)',
+                            'rgba(210, 38, 30, 1.0)',
+                            'rgba(95, 150, 198, 0.9)',
+                            'rgba(85, 86, 47, 0.75)',
+                            'rgba(107, 184, 35, 1.0)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 51, 0)',
+                            'rgba(0, 255, 0, 1)',
+                            'rgba(34, 40, 34, 1.0)',
+                            'rgba(210, 38, 30, 1.0)',
+                            'rgba(95, 150, 198, 0.9)',
+                            'rgba(85, 86, 47, 0.75)',
+                            'rgba(107, 184, 35, 1.0)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: 'black', // Warna angka (ticks) sumbu Y
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: 'black', // Warna angka (ticks) sumbu X
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // Menghilangkan legenda
+                        }
+                    }
+                }
+            });
+        }
+
+        function updatePlatformList(listId, platformCounts) {
+        const list = document.getElementById(listId);
+        list.innerHTML = `
+            <ul>
+                <li>Instagram : ${platformCounts.instagram}</li>
+                <li>WhatsApp : ${platformCounts.whatsapp}</li>
+                <li>TikTok : ${platformCounts.tiktok}</li>
+                <li>YouTube : ${platformCounts.youtube}</li>
+            </ul>
+            <ul>
+                <li>Artikel : ${platformCounts.artikel}</li>
+                <li>Berita : ${platformCounts.berita}</li>
+                <li>Website : ${platformCounts.website}</li>
+            </ul>
+        `;
+    }
     </script>
 
     <script src="/static/particles.js"></script>
