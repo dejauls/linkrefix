@@ -1391,12 +1391,20 @@ video {
     margin-top: 1rem;
   }
 
+  .sm\:mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
   .sm\:h-\[5px\] {
     height: 5px;
   }
 
   .sm\:max-w-32 {
     max-width: 8rem;
+  }
+
+  .sm\:pt-8 {
+    padding-top: 2rem;
   }
 }
 
