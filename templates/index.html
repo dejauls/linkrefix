@@ -33,8 +33,8 @@
 
 <body class="bg-white text-black dark:bg-gray-800 dark:text-white transition duration-300">
     <header
-        class="fixed absolute z-99999999999999999 bg-gradient-to-b from-black via-gray-700 to-transparent md:hidden ">
-        <nav class="fixed z-50 md:z-auto bg-gradient-to-b from-black via-gray-800/60 to-transparent md:static flex p-5 md:p-20 justify-between items-center w-full gap-5 "
+        class="fixed absolute z-99999999999999999 bg-gradient-to-b from-black via-gray-700 to-transparent md:hidden">
+        <nav class="fixed z-50 md:z-auto bg-gradient-to-b from-black via-gray-800/60 to-transparent md:static flex p-5 md:p-20 justify-between items-center w-full gap-5"
             data-aos="zoom-y-out">
             <!-- // backdrop-blur-md md:backdrop-blur-none // -->
             <label for="check-mobilenav" class="flex flex-col min-w-10 max-w-20 cursor-pointer md:hidden">
@@ -54,7 +54,6 @@
                     <span class="sr-only">Reclea Brick</span>
                 </a>
             </div>
-
         </nav>
 
         <div id="offscreen-nav-container"
@@ -86,13 +85,12 @@
                 </ul>
             </div>
             <div
-                class="text-white text-xs font-light md:font-normal md:text-base text-center p-5 border-t border-stone-600 ">
+                class="text-white text-xs font-light md:font-normal md:text-base text-center p-5 border-t border-stone-600">
                 CopyRight &copy; 2024 Recleabrick. All Rights Reserved designed by
                 <a href="https://www.instagram.com/ninjafly.id/"
                     class="underline italic transition-transform duration-300 hover:scale-110 hover:text-red-700">Ninjafly.id</a>
             </div>
         </div>
-
     </header>
 
     <!-- SIDEBAR -->
@@ -458,8 +456,8 @@
         }
 
         function updatePlatformList(listId, platformCounts) {
-        const list = document.getElementById(listId);
-        list.innerHTML = `
+            const list = document.getElementById(listId);
+            list.innerHTML = `
             <ul>
                 <li>Instagram : ${platformCounts.instagram}</li>
                 <li>WhatsApp : ${platformCounts.whatsapp}</li>
@@ -472,7 +470,7 @@
                 <li>Website : ${platformCounts.website}</li>
             </ul>
         `;
-    }
+        }
     </script>
 
     <script src="/static/particles.js"></script>
@@ -542,12 +540,16 @@
     <script>
         document.getElementById('check-mobilenav').addEventListener('change', function () {
             const navContainer = document.getElementById('offscreen-nav-container');
+            const body = document.body;
+
             if (this.checked) {
                 navContainer.classList.remove('-translate-x-full');
                 navContainer.classList.add('translate-x-0');
+                body.classList.add('overflow-hidden');
             } else {
                 navContainer.classList.remove('translate-x-0');
                 navContainer.classList.add('-translate-x-full');
+                body.classList.remove('overflow-hidden');
             }
         });
     </script>
