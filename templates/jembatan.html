@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECLEA BRICK</title>
+    <link rel="icon" href="/static/img/reclea14.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Include jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<!-- Google tag (gtag.js)
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47THL60G69"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-47THL60G69');
+</script> -->
+    
+<style>
+    .custom-container {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    @media (min-width: 576px) {
+        .custom-container {
+            max-width: 540px;
+            /* Lebar container untuk layar kecil */
+        }
+    }
+
+    @media (min-width: 768px) {
+        .custom-container {
+            max-width: 720px;
+            /* Lebar container untuk layar medium */
+        }
+    }
+
+    @media (min-width: 992px) {
+        .custom-container {
+            max-width: 960px;
+            /* Lebar container untuk layar besar */
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .custom-container {
+            max-width: 1140px;
+            /* Lebar container untuk layar ekstra besar */
+        }
+    }
+</style>
+
+<body>
+    <section class="animated-background">
+        <div id="stars1"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </section>
+    <a id="profilePicture" href="">
+        <img src="/static/img/reclea14.png" alt="Profile Picture">
+    </a>
+
+    <div id="userName">
+        @Bataramahlingkungan
+    </div>
+    <div id="hashtag">
+        #Berani Menjadi Lebih Baik 💪
+        <hr>
+    </div>
+
+    <div class="custom-container">
+        <div>
+            <a class="link" href="https://tribelio.page/reclea-brick" target="_blank" id="artikelLink">
+                <i class="fa fa-comment">&nbsp;</i>WHY RECLEA BRICK ?
+            </a>
+        </div>
+        <div>
+            <a class="link" href="https://analisadaily.com/berita/baca/2022/01/10/1026451/batu-bata-hitam-reclea-brick-penuhi-standar-keamanan-dan-syarat-sni/#.Ydxd7qUyQuc.whatsapp" target="_blank" id="beritaLink">
+                <i class="fa fa-file-text-o">&nbsp;</i> (NEWS) Bata Reclea Sesuai Standard SNI
+            </a> 
+        </div>
+        <div>
+            <a class="link" href="https://bataramahlingkungan.co.id/" target="_blank" id="websiteLink">
+                <i class="fab fa-chrome">&nbsp;</i>Website Reclea
+            </a>
+        </div>
+        <div>
+            <a class="link" href="https://www.instagram.com/bataramahlingkungan.id/" target="_blank" id="instagramLink">
+                <i class="fab fa-instagram">&nbsp;</i>Instagram
+            </a>
+        </div>
+        <div>
+            <a class="link" href="https://wa.me/+6281263837222" target="_blank" id="whatsappLink">
+                <i class="fab fa-whatsapp">&nbsp;</i>WhatsApp
+            </a>
+        </div>
+        <div>
+            <a class="link" href="https://www.tiktok.com/@recleabrick?lang=en" target="_blank" id="tiktokLink">
+                <i class="fab fa-brands fa-tiktok">&nbsp;</i>Tiktok
+            </a>
+        </div>
+        <div>
+            <a class="link" href="https://www.youtube.com/@RecleaBrick" target="_blank" id="youtubeLink">
+                <i class="fa fa-play-circle">&nbsp;</i>Youtube
+            </a>
+        </div>
+    </div>
+    <script>
+        function posting(url, platform) {
+            $.ajax({
+                type: 'POST',
+                url: '/link',
+                data: { platform: platform },
+                success: function(response) {
+                    console.log(response['msg']);
+                    window.location.href = url;  
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);  
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('#instagramLink').click(function(event) {
+                event.preventDefault();  
+                const url = $(this).attr('href');  
+                posting(url, 'instagram');  
+            });
+            $('#whatsappLink').click(function(event) {
+                event.preventDefault();  
+                const url = $(this).attr('href');  
+                posting(url, 'whatsapp');  
+            });
+            $('#tiktokLink').click(function(event) {
+                event.preventDefault();  
+                const url = $(this).attr('href');  
+                posting(url, 'tiktok');  
+            });
+            $('#youtubeLink').click(function(event) {
+                event.preventDefault();  
+                const url = $(this).attr('href');  
+                posting(url, 'youtube');  
+            });
+            $('#artikelLink').click(function(event) {
+                event.preventDefault();  
+                const url = $(this).attr('href');  
+                posting(url, 'artikel');  
+            });
+            $('#websiteLink').click(function(event) {
+                event.preventDefault();  
+                const url = $(this).attr('href');  
+                posting(url, 'website');  
+            });
+            $('#beritaLink').click(function(event) {
+                event.preventDefault();  
+                const url = $(this).attr('href');  
+                posting(url, 'berita');  
+            });
+        });
+    </script>
+</body>
+
+</html>

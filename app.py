@@ -15,7 +15,7 @@ db = client[DB_NAME]
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/visitor')
 def home():
     return render_template('index.html')
 
@@ -23,25 +23,73 @@ def home():
 def view():
     return render_template('view.html')
 
+@app.route('/')
+def halaman():
+    return render_template('jembatan.html')
+
+
 @app.route("/link", methods=["POST"])
 def link_post():
     try:
         platform = request.form['platform']
         print(f"Received platform: {platform}") 
-        
-        current_time = datetime.now().strftime('%Y-%m-%d')  
+        timezone = pytz.timezone("Asia/Jakarta")
+        current_time = datetime.now(timezone).strftime('%Y-%m-%d') 
         doc = {
             'platform': platform,
             'timestamp': current_time  
         }
 
         result = db.link.insert_one(doc)
-        print(f"Document inserted with id: {result.inserted_id}") 
+        print(f"Document inserted with id: {result.inserted_id}")  # Debug: Print insertion result
 
         return jsonify({'msg': 'POST request received!'})
     except Exception as e:
-        print(f"Error: {e}") 
+        print(f"Error: {e}")  # Debug: Print any error that occurs
         return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+
+# @app.route("/link", methods=["POST"])
+# def link_post():
+#     try:
+#         platform = request.form['platform']
+#         print(f"Received platform: {platform}") 
+        
+#         current_time = datetime.now().strftime('%Y-%m-%d')  
+#         doc = {
+#             'platform': platform,
+#             'timestamp': current_time  
+#         }
+
+#         result = db.link.insert_one(doc)
+#         print(f"Document inserted with id: {result.inserted_id}") 
+
+#         return jsonify({'msg': 'POST request received!'})
+#     except Exception as e:
+#         print(f"Error: {e}") 
+#         return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+    
+
+@app.route('/data_date_range', methods=['GET'])
+def data_date_range():
+    try:
+        start_date = request.args.get('start')
+        end_date = request.args.get('end')
+        if not start_date or not end_date:
+            return jsonify({"error": "Start and end date parameters are required"}), 400
+        
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+        except ValueError:
+            return jsonify({"error": "Invalid date format, should be YYYY-MM-DD"}), 400
+        
+        query = {'timestamp': {'$gte': start_date, '$lte': end_date}}
+        data = list(db.link.find(query, {'_id': 0, 'platform': 1, 'timestamp': 1}))
+        return jsonify(data)
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+
 
 @app.route('/view_data', methods=['GET'])
 def view_data():
@@ -223,6 +271,23 @@ def get_month_data(year, month):
             chart_data[platform]['data'][index] = count
 
     return chart_data    
+
+
+@app.route('/data_total', methods=['GET'])
+def data_total():
+    try:
+        platforms = ['instagram', 'whatsapp', 'youtube', 'website', 'artikel', 'berita', 'tiktok']
+        counts = {}
+
+        for platform in platforms:
+            count = db.link.count_documents({'platform': platform})
+            counts[platform] = count
+        
+        return jsonify(counts)
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

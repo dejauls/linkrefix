@@ -11,17 +11,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <style>
     .list-container {
         display: flex;
         flex-wrap: wrap;
+
     }
 
     .list-container ul {
         flex: 1;
-        min-width: 200px;
+        min-width: 100px;
         /* Atur min-width sesuai kebutuhan */
     }
 
@@ -30,6 +33,8 @@
         margin: 5px 0;
     }
 </style>
+
+
 
 <body class="bg-white text-black dark:bg-gray-800 dark:text-white transition duration-300">
     <header
@@ -99,11 +104,18 @@
 
         <ul class="space-y-4">
             <li>
-                <div class="mb-auto flex justify-center ">
-                    <img src="/static/img/logobar.png" alt="logo reclea" class="w-28 h-auto mb-4">
+                <div class="mb-auto flex flex-row justify-center gap-4">
+                    <img src="/static/img/logobar.png" alt="logo reclea" class="w-32 h-auto mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 512 512" viewBox="0 0 512 512"
+                        id="x" width="100" height="100">
+                        <polygon
+                            points="500.899 1 406.611 1 256 195.209 105.389 1 11.101 1 208.856 256 11.101 511 105.389 511 256 316.791 406.611 511 500.899 511 303.144 256"
+                            fill="white"></polygon>
+                    </svg>
+                    <img src="/static/img/NinjaFlylogo.png" alt="logo ninja" class="w-28 h-28">
                 </div>
             </li>
-            <li class="px-4 py-2 bg-zinc-100 shadow-md  ">
+            <li class="px-4 py-2 bg-zinc-100 shadow-md">
                 <a href="/" class="flex items-center space-x-2">
                     <i class='bx bxs-dashboard '></i>
                     <span class="dark:text-black">Dashboard</span>
@@ -117,7 +129,6 @@
             </li>
         </ul>
         <div class="mt-auto -mb-6 flex justify-center">
-            <img src="/static/img/NinjaFlylogo.png" alt="logo ninja" class="w-28 h-28">
         </div>
         <a href="https://www.instagram.com/ninjafly.id/" class=" flex justify-center items-center space-x-2">
             <span class="font-bold hover:border hover:border-red-500 text-white">Ninjafly</span>
@@ -148,6 +159,17 @@
 
         <!-- MAIN -->
         <main class="mt-6 ml-2 md:ml-4">
+            <div
+                class="relative ml-0 md:ml-12 sm:mt-8 gap-2  bg-zinc-700/40 shadow rounded-lg h-8 w-full md:w-5/6 flex flex-col ">
+                <div id="" class="w-full h-full pt-1">
+                    <marquee class="font-bold text-white" behavior="scroll" direction="left">BERANI MENJADI
+                        LEBIH BAIK BERANI MENJADI LEBIH BAIK BERANI MENJADI LEBIH BAIK BERANI MENJADI LEBIH
+                        BAIK BERANI MENJADI LEBIH BAIK BERANI MENJADI LEBIH BAIK BERANI MENJADI LEBIH BAIK
+                        BERANI MENJADI LEBIH BAIK BERANI MENJADI LEBIH BAIK</marquee>
+                </div>
+
+
+            </div>
             <div class="mb-6 p-4 pt-8 max-w-fit rounded-md justify-center mx-auto ">
                 <h1 class="text-4xl text-white font-bold">Dashboard</h1>
                 <ul class="flex space-x-2 text-white justify-center mx-auto">
@@ -155,7 +177,8 @@
                 </ul>
             </div>
 
-            <div class="m-4 mt-10 ml-0 text-white font-bold underline p-2">
+
+            <div class="m-4 mt-4 ml-0 text-white font-bold underline p-2">
                 <h2>Total Performance :</h2>
             </div>
 
@@ -215,10 +238,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  h-full mt-10">
                     <!-- Div di kiri -->
                     <div id="left" class="relative p-4 rounded-lg bg-zinc-100 h-full flex flex-col">
-                        <h2 class="text-black text-lg font-semibold ml-2 mb-4">Jumlah Klik Pada Hari Ini</h2>
-                        <canvas id="dailyChart" class="w-full h-full"></canvas>
+                        <div class="flex flex-col-2 justify-evenly">
+                            <h2 class="text-black text-lg font-semibold ml-2 mb-4">Jumlah Klik </h2>
+                            <input type="text" id="datepicker" class="mb-4 p-2 rounded-lg border border-gray-300 w-1/2">
+                        </div>
+
+                        <canvas id="dateChart" class="w-full h-full"></canvas>
                         <h2 class="text-black text-lg font-semibold ml-2 mb-4">Total Klik :</h2>
-                        <div id="dayList" class="list-container">
+                        <div id="dateList" class="list-container">
                             <ul>
                                 <li>Instagram : </li>
                                 <li>WhatsApp : </li>
@@ -232,12 +259,41 @@
                             </ul>
                         </div>
                     </div>
+
                     <!-- Div di kanan -->
                     <div id="chart"
                         class="relative p-4 ml-0 lg:ml-4 sm:mt-4 md:mt-0 bg-zinc-100 shadow rounded-lg h-full flex flex-col">
-                        <h2 class="text-black text-lg font-semibold ml-2">Berikut data mingguan (senin-minggu)</h2>
+                        <div class="flex justify-center">
+                            <button type="button" id="dayButton"
+                                class="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 me-2 mb-2">
+                                Hari Ini
+                            </button>
+                            <button type="button" id="weekButton"
+                                class="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 me-2 mb-2">
+                                Minggu Ini
+                            </button>
+                            <button type="button" id="monthButton"
+                                class="text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 me-2 mb-2">
+                                Bulan Ini
+                            </button>
+                        </div>
+                        <canvas id="dailyChart" class="w-full h-full" style="display: none;"></canvas>
                         <canvas id="weeklyChart" class="w-full h-full"></canvas>
+                        <canvas id="monthChart" class="w-full h-full" style="display: none;"></canvas>
                         <h2 class="text-black text-lg font-semibold ml-2 mb-4">Total Klik :</h2>
+                        <div id="dayList" class="list-container" style="display: none;">
+                            <ul>
+                                <li>Instagram : </li>
+                                <li>WhatsApp : </li>
+                                <li>TikTok : </li>
+                                <li>YouTube : </li>
+                            </ul>
+                            <ul>
+                                <li>Artikel : </li>
+                                <li>Berita : </li>
+                                <li>Website : </li>
+                            </ul>
+                        </div>
                         <div id="weekList" class="list-container">
                             <ul>
                                 <li>Instagram : </li>
@@ -251,8 +307,21 @@
                                 <li>Website : </li>
                             </ul>
                         </div>
+                        <div id="monthList" class="list-container" style="display: none;">
+                            <ul>
+                                <li>Instagram : </li>
+                                <li>WhatsApp : </li>
+                                <li>TikTok : </li>
+                                <li>YouTube : </li>
+                            </ul>
+                            <ul>
+                                <li>Artikel : </li>
+                                <li>Berita : </li>
+                                <li>Website : </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div id="left" class="relative mt-4 p-4 rounded-lg bg-zinc-100 h-full flex flex-col">
+                    <!-- <div id="left" class="relative mt-4 p-4 rounded-lg bg-zinc-100 h-full flex flex-col">
                         <h2 class="text-black text-lg font-semibold ml-2 mb-4">Jumlah Klik Pada Bulan Ini :</h2>
                         <canvas id="monthChart" class="w-full h-full"></canvas>
                         <h2 class="text-black text-lg font-semibold ml-2 mb-4">Total Klik :</h2>
@@ -269,14 +338,28 @@
                                 <li>Website : </li>
                             </ul>
                         </div>
-                    </div>
-                    <!-- Div di kanan -->
-                    <!-- <div id="chart" class="relative  ml-4 mt-4 bg-zinc-100 shadow rounded-lg">
-                        <h2 class="text-black text-lg font-semibold ml-2">Berikut data mingguan(senin-minggu)</h2>
-                        <canvas id="weeklyChart" style="width: 100%; height: 80%;" class="mt-4"></canvas>
                     </div> -->
+                    <div class="flex flex-col  ">
+                        <div id="chart"
+                            class="relative ml-0  sm:mt-4 md:mt-4 gap-2  bg-zinc-100 shadow rounded-lg h-48 md:h-60 w-full md:w-10/12 flex flex-col ">
+                            <div id="chartbul" class="w-full h-full"></div>
+
+                        </div>
+                        <div id="chart"
+                            class="relative ml-0 sm:mt-4  bg-zinc-100 shadow rounded-lg h-36 w-full md:w-5/6 flex flex-col ">
+                            <div id="chartbul" class="w-full h-full pt-4"></div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- Div di kanan -->
+                    <div id="chart" class="relative md:-ml-16 mt-4 bg-zinc-100 shadow rounded-lg ">
+                        <canvas id="weeklyCha" style="width: 100%; height: 80%;" class="mt-4"></canvas>
+                    </div>
 
                 </div>
+
             </div>
         </main>
         <!-- MAIN -->
@@ -342,138 +425,355 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/data_month')
-                .then(response => response.json())
-                .then(data => {
-                    const platformCounts = getPlatformCounts(data);
-                    renderChart('monthChart', platformCounts);
-                    updatePlatformList('monthList', platformCounts);
-                })
-                .catch(error => console.error('Error:', error));
+        let dayChart = null;
+        let weekChart = null;
+        let monthChart = null;
 
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initial fetch for weekly data
             fetch('/data_week')
                 .then(response => response.json())
                 .then(data => {
                     const platformCounts = getPlatformCounts(data);
-                    renderChart('weeklyChart', platformCounts);
+                    weekChart = renderChart('weeklyChart', platformCounts);
                     updatePlatformList('weekList', platformCounts);
+
+                    // Show the week chart and list, hide the month chart and list initially
+                    document.getElementById('weeklyChart').style.display = 'block';
+                    document.getElementById('weekList').style.display = 'block';
+                    document.getElementById('monthChart').style.display = 'none';
+                    document.getElementById('monthList').style.display = 'none';
                 })
                 .catch(error => console.error('Error:', error));
 
-            fetch('/data_today')
-                .then(response => response.json())
-                .then(data => {
-                    const platformCounts = getPlatformCounts(data);
-                    renderChart('dailyChart', platformCounts);
-                    updatePlatformList('dayList', platformCounts);
-                })
-                .catch(error => console.error('Error:', error));
-        });
+            // Event listener for "Hari Ini" button
+            document.getElementById('dayButton').addEventListener('click', function () {
+                // Fetch today data
+                fetch('/data_today')
+                    .then(response => response.json())
+                    .then(data => {
+                        const platformCounts = getPlatformCounts(data);
 
-        function getPlatformCounts(data) {
-            const counts = {
-                instagram: 0,
-                whatsapp: 0,
-                tiktok: 0,
-                youtube: 0,
-                artikel: 0,
-                berita: 0,
-                website: 0
-            };
-            data.forEach(item => {
-                if (counts[item.platform] !== undefined) {
-                    counts[item.platform]++;
-                }
+                        // Destroy previous day chart if exists
+                        if (dayChart) dayChart.destroy();
+
+                        // Render new day chart
+                        dayChart = renderChart('dailyChart', platformCounts);
+                        updatePlatformList('dayList', platformCounts);
+
+                        // Show the day chart and list, hide the week and month charts and lists
+                        document.getElementById('dailyChart').style.display = 'block';
+                        document.getElementById('dayList').style.display = 'block';
+                        document.getElementById('weeklyChart').style.display = 'none';
+                        document.getElementById('weekList').style.display = 'none';
+                        document.getElementById('monthChart').style.display = 'none';
+                        document.getElementById('monthList').style.display = 'none';
+                    })
+                    .catch(error => console.error('Error:', error));
             });
-            return counts;
-        }
 
-        function renderChart(chartId, platformCounts) {
-            const ctx = document.getElementById(chartId).getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Instagram', 'WhatsApp', 'TikTok', 'YouTube', 'Artikel', 'Berita', 'Website'],
-                    datasets: [{
-                        data: [
-                            platformCounts.instagram,
-                            platformCounts.whatsapp,
-                            platformCounts.tiktok,
-                            platformCounts.youtube,
-                            platformCounts.artikel,
-                            platformCounts.berita,
-                            platformCounts.website
-                        ],
-                        backgroundColor: [
-                            'rgb(255, 51, 0)',
-                            'rgba(18, 161, 49, 0.9)',
-                            'rgba(34, 40, 34, 1.0)',
-                            'rgba(210, 38, 30, 1.0)',
-                            'rgba(95, 150, 198, 0.9)',
-                            'rgba(85, 86, 47, 0.75)',
-                            'rgba(107, 184, 35, 1.0)'
-                        ],
-                        borderColor: [
-                            'rgb(255, 51, 0)',
-                            'rgba(0, 255, 0, 1)',
-                            'rgba(34, 40, 34, 1.0)',
-                            'rgba(210, 38, 30, 1.0)',
-                            'rgba(95, 150, 198, 0.9)',
-                            'rgba(85, 86, 47, 0.75)',
-                            'rgba(107, 184, 35, 1.0)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                color: 'black', // Warna angka (ticks) sumbu Y
-                                font: {
-                                    weight: 'bold'
+            // Event listener for "Minggu Ini" button
+            document.getElementById('weekButton').addEventListener('click', function () {
+                // Fetch weekly data
+                fetch('/data_week')
+                    .then(response => response.json())
+                    .then(data => {
+                        const platformCounts = getPlatformCounts(data);
+
+                        // Destroy previous week chart if exists
+                        if (weekChart) weekChart.destroy();
+
+                        // Render new week chart
+                        weekChart = renderChart('weeklyChart', platformCounts);
+                        updatePlatformList('weekList', platformCounts);
+
+                        // Show the week chart and list, hide the day and month charts and lists
+                        document.getElementById('weeklyChart').style.display = 'block';
+                        document.getElementById('weekList').style.display = 'block';
+                        document.getElementById('dailyChart').style.display = 'none';
+                        document.getElementById('dayList').style.display = 'none';
+                        document.getElementById('monthChart').style.display = 'none';
+                        document.getElementById('monthList').style.display = 'none';
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+
+            // Event listener for "Bulan Ini" button
+            document.getElementById('monthButton').addEventListener('click', function () {
+                // Fetch monthly data
+                fetch('/data_month')
+                    .then(response => response.json())
+                    .then(data => {
+                        const platformCounts = getPlatformCounts(data);
+
+                        // Destroy previous month chart if exists
+                        if (monthChart) monthChart.destroy();
+
+                        // Render new month chart
+                        monthChart = renderChart('monthChart', platformCounts);
+                        updatePlatformList('monthList', platformCounts);
+
+                        // Show the month chart and list, hide the day and week charts and lists
+                        document.getElementById('monthChart').style.display = 'block';
+                        document.getElementById('monthList').style.display = 'block';
+                        document.getElementById('dailyChart').style.display = 'none';
+                        document.getElementById('dayList').style.display = 'none';
+                        document.getElementById('weeklyChart').style.display = 'none';
+                        document.getElementById('weekList').style.display = 'none';
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+
+            function getPlatformCounts(data) {
+                const counts = {
+                    instagram: 0,
+                    whatsapp: 0,
+                    tiktok: 0,
+                    youtube: 0,
+                    artikel: 0,
+                    berita: 0,
+                    website: 0
+                };
+                data.forEach(item => {
+                    if (counts[item.platform] !== undefined) {
+                        counts[item.platform]++;
+                    }
+                });
+                return counts;
+            }
+
+            function renderChart(chartId, platformCounts) {
+                const ctx = document.getElementById(chartId).getContext('2d');
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Instagram', 'WhatsApp', 'TikTok', 'YouTube', 'Artikel', 'Berita', 'Website'],
+                        datasets: [{
+                            data: [
+                                platformCounts.instagram,
+                                platformCounts.whatsapp,
+                                platformCounts.tiktok,
+                                platformCounts.youtube,
+                                platformCounts.artikel,
+                                platformCounts.berita,
+                                platformCounts.website
+                            ],
+                            backgroundColor: [
+                                'rgb(255, 51, 0)',
+                                'rgba(18, 161, 49, 0.9)',
+                                'rgba(34, 40, 34, 1.0)',
+                                'rgba(210, 38, 30, 1.0)',
+                                'rgba(95, 150, 198, 0.9)',
+                                'rgba(85, 86, 47, 0.75)',
+                                'rgba(107, 184, 35, 1.0)'
+                            ],
+                            borderColor: [
+                                'rgb(255, 51, 0)',
+                                'rgba(0, 255, 0, 1)',
+                                'rgba(34, 40, 34, 1.0)',
+                                'rgba(210, 38, 30, 1.0)',
+                                'rgba(95, 150, 198, 0.9)',
+                                'rgba(85, 86, 47, 0.75)',
+                                'rgba(107, 184, 35, 1.0)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'black', // Warna angka (ticks) sumbu Y
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: 'black', // Warna angka (ticks) sumbu X
+                                    font: {
+                                        weight: 'bold'
+                                    }
                                 }
                             }
                         },
-                        x: {
-                            ticks: {
-                                color: 'black', // Warna angka (ticks) sumbu X
-                                font: {
-                                    weight: 'bold'
-                                }
+                        plugins: {
+                            legend: {
+                                display: false // Menghilangkan legenda
                             }
                         }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false // Menghilangkan legenda
-                        }
                     }
-                }
-            });
-        }
+                });
+            }
 
-        function updatePlatformList(listId, platformCounts) {
-            const list = document.getElementById(listId);
-            list.innerHTML = `
-            <ul>
-                <li>Instagram : ${platformCounts.instagram}</li>
-                <li>WhatsApp : ${platformCounts.whatsapp}</li>
-                <li>TikTok : ${platformCounts.tiktok}</li>
-                <li>YouTube : ${platformCounts.youtube}</li>
-            </ul>
-            <ul>
-                <li>Artikel : ${platformCounts.artikel}</li>
-                <li>Berita : ${platformCounts.berita}</li>
-                <li>Website : ${platformCounts.website}</li>
-            </ul>
-        `;
-        }
+            function updatePlatformList(listId, platformCounts) {
+                const list = document.getElementById(listId);
+                list.innerHTML = `
+                    <div class="list-container">
+                        <ul>
+                            <li>Instagram : ${platformCounts.instagram}</li>
+                            <li>WhatsApp : ${platformCounts.whatsapp}</li>
+                            <li>TikTok : ${platformCounts.tiktok}</li>
+                            <li>YouTube : ${platformCounts.youtube}</li>
+                        </ul>
+                        <ul>
+                            <li>Artikel : ${platformCounts.artikel}</li>
+                            <li>Berita : ${platformCounts.berita}</li>
+                            <li>Website : ${platformCounts.website}</li>
+                        </ul>
+                    </div>
+                `;
+            }
+        });
     </script>
 
     <script src="/static/particles.js"></script>
+
+
+    <script>
+        let dateChart = null;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const today = new Date().toISOString().split('T')[0];
+
+            // Initial fetch for today's data
+            fetchDataForDateRange(today, today);
+
+            // Initialize flatpickr datepicker with range mode and today's date as default
+            flatpickr("#datepicker", {
+                mode: "range",
+                dateFormat: "Y-m-d",
+                defaultDate: [today, today],
+                onChange: function (selectedDates, dateStr, instance) {
+                    if (selectedDates.length === 2) {
+                        const startDate = selectedDates[0].toISOString().split('T')[0];
+                        const endDate = selectedDates[1].toISOString().split('T')[0];
+                        fetchDataForDateRange(startDate, endDate);
+                    }
+                }
+            });
+
+            function fetchDataForDateRange(startDate, endDate) {
+                fetch(`/data_date_range?start=${startDate}&end=${endDate}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const platformCounts = getPlatformCounts(data);
+
+                        // Destroy previous chart if exists
+                        if (dateChart) dateChart.destroy();
+
+                        // Render new chart
+                        dateChart = renderChart('dateChart', platformCounts);
+                        updatePlatformList('dateList', platformCounts);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            function getPlatformCounts(data) {
+                const counts = {
+                    instagram: 0,
+                    whatsapp: 0,
+                    tiktok: 0,
+                    youtube: 0,
+                    artikel: 0,
+                    berita: 0,
+                    website: 0
+                };
+                data.forEach(item => {
+                    if (counts[item.platform] !== undefined) {
+                        counts[item.platform]++;
+                    }
+                });
+                return counts;
+            }
+
+            function renderChart(chartId, platformCounts) {
+                const ctx = document.getElementById(chartId).getContext('2d');
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Instagram', 'WhatsApp', 'TikTok', 'YouTube', 'Artikel', 'Berita', 'Website'],
+                        datasets: [{
+                            data: [
+                                platformCounts.instagram,
+                                platformCounts.whatsapp,
+                                platformCounts.tiktok,
+                                platformCounts.youtube,
+                                platformCounts.artikel,
+                                platformCounts.berita,
+                                platformCounts.website
+                            ],
+                            backgroundColor: [
+                                'rgb(255, 51, 0)',
+                                'rgba(18, 161, 49, 0.9)',
+                                'rgba(34, 40, 34, 1.0)',
+                                'rgba(210, 38, 30, 1.0)',
+                                'rgba(95, 150, 198, 0.9)',
+                                'rgba(85, 86, 47, 0.75)',
+                                'rgba(107, 184, 35, 1.0)'
+                            ],
+                            borderColor: [
+                                'rgb(255, 51, 0)',
+                                'rgba(0, 255, 0, 1)',
+                                'rgba(34, 40, 34, 1.0)',
+                                'rgba(210, 38, 30, 1.0)',
+                                'rgba(95, 150, 198, 0.9)',
+                                'rgba(85, 86, 47, 0.75)',
+                                'rgba(107, 184, 35, 1.0)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: 'black', // Warna angka (ticks) sumbu Y
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: 'black', // Warna angka (ticks) sumbu X
+                                    font: {
+                                        weight: 'bold'
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false // Menghilangkan legenda
+                            }
+                        }
+                    }
+                });
+            }
+
+            function updatePlatformList(listId, platformCounts) {
+                const list = document.getElementById(listId);
+                list.innerHTML = `
+                        <ul>
+                            <li>Instagram : ${platformCounts.instagram}</li>
+                            <li>WhatsApp : ${platformCounts.whatsapp}</li>
+                            <li>TikTok : ${platformCounts.tiktok}</li>
+                            <li>YouTube : ${platformCounts.youtube}</li>
+                        </ul>
+                        <ul>
+                            <li>Artikel : ${platformCounts.artikel}</li>
+                            <li>Berita : ${platformCounts.berita}</li>
+                            <li>Website : ${platformCounts.website}</li>
+                        </ul>
+                `;
+            }
+        });
+    </script>
+
 
     <!-- <script type='text/javascript'>
         //<![CDATA[
@@ -554,6 +854,84 @@
         });
     </script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/data_total')  // Endpoint baru untuk mendapatkan total data per platform
+                .then(response => response.json())
+                .then(data => {
+                    var options = {
+                        series: [
+                            data.instagram,
+                            data.whatsapp,
+                            data.youtube,
+                            data.website,
+                            data.artikel,
+                            data.berita,
+                            data.tiktok
+                        ],
+                        plotOptions: {
+                            pie: {
+                                expandOnClick: false
+                            }
+                        },
+                        chart: {
+                            type: 'donut',
+                            height: '100%',
+                            width: '100%'
+                        },
+                        labels: [
+                            `Instagram (${data.instagram})`,
+                            `WhatsApp (${data.whatsapp})`,
+                            `YouTube (${data.youtube})`,
+                            `Website (${data.website})`,
+                            `Artikel (${data.artikel})`,
+                            `Berita (${data.berita})`,
+                            `TikTok (${data.tiktok})`
+                        ],
+
+                        colors: [
+                            'rgb(255, 51, 0)',       // Warna untuk Instagram
+                            'rgba(18, 161, 49, 0.9)', // Warna untuk WhatsApp
+                            'rgba(210, 38, 30, 1.0)',// Warna untuk YouTube
+                            'rgba(34, 40, 34, 1.0)',  // Warna untuk Website
+
+                            'rgba(95, 150, 198, 0.9)',// Warna untuk Artikel
+                            'rgba(85, 86, 47, 0.75)', // Warna untuk Berita
+                            'rgba(107, 184, 35, 1.0)' // Warna untuk TikTok
+                        ],
+                        stroke: {
+                            colors: ['#fff']
+                        },
+                        yaxis: {
+                            show: false
+                        },
+                        grid: {
+                            show: false
+                        },
+                        fill: {
+                            opacity: 0.9
+                        },
+                        responsive: [{
+                            breakpoint: 300,
+                            options: {
+                                chart: {
+                                    width: 440
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }]
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chartbul"), options);
+                    chart.render();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
 
 </body>
 
