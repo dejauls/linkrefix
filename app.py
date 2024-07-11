@@ -287,6 +287,21 @@ def data_total():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
+    
+@app.route('/total_semuadata', methods=['GET'])
+def semuadata():
+    try:
+        timezone = pytz.timezone("Asia/Jakarta")
+        today = datetime.now(timezone)
+        last_week = today - timedelta(days=7)
+        
+        total_count = db.link.count_documents({})
+        previous_week_count = db.link.count_documents({'timestamp': {'$lt': last_week.strftime('%Y-%m-%d')}})
+        
+        return jsonify({'total_count': total_count, 'previous_week_count': previous_week_count})
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'msg': 'An error occurred', 'error': str(e)}), 500
 
 
 if __name__ == '__main__':
