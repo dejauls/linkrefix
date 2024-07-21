@@ -25,11 +25,11 @@ body {
 
 #profilePicture, #profilePicture img {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 220px;
+    height: 200px;
     display: block;
     margin: auto;
-    border-radius: 50%;
+    margin-top: -20px;
     -webkit-tap-highlight-color: transparent;
 /*     outline: 2px solid white; */
 }
@@ -44,6 +44,7 @@ body {
     width: 100%;
     text-align: center;
     text-decoration: none;
+    margin-top: -20px;
 }
 #links {
     max-width: 675px;
