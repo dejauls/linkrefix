@@ -24,7 +24,7 @@
 
     gtag('config', 'G-47THL60G69');
 </script> -->
-    
+
 <style>
     .custom-container {
         margin-right: auto;
@@ -108,11 +108,13 @@
             </a>
         </div>
         <div>
-            <a class="link" href="https://analisadaily.com/berita/baca/2022/01/10/1026451/batu-bata-hitam-reclea-brick-penuhi-standar-keamanan-dan-syarat-sni/#.Ydxd7qUyQuc.whatsapp" target="_blank" id="beritaLink">
+            <a class="link"
+                href="https://analisadaily.com/berita/baca/2022/01/10/1026451/batu-bata-hitam-reclea-brick-penuhi-standar-keamanan-dan-syarat-sni/#.Ydxd7qUyQuc.whatsapp"
+                target="_blank" id="beritaLink">
                 <i class="fa fa-file-text-o">&nbsp;</i> (NEWS) Bata Reclea Sesuai Standard SNI
-            </a> 
+            </a>
         </div>
-        
+
         <div>
             <a class="link" href="https://www.instagram.com/bataramahlingkungan.id/" target="_blank" id="instagramLink">
                 <i class="fab fa-instagram">&nbsp;</i>Instagram
@@ -125,51 +127,51 @@
                 type: 'POST',
                 url: '/link',
                 data: { platform: platform },
-                success: function(response) {
+                success: function (response) {
                     console.log(response['msg']);
-                    window.location.href = url;  
+                    window.location.href = url;
                 },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);  
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
                 }
             });
         }
 
-        $(document).ready(function() {
-            $('#instagramLink').click(function(event) {
-                event.preventDefault();  
-                const url = $(this).attr('href');  
-                posting(url, 'instagram');  
+        $(document).ready(function () {
+            $('#instagramLink').click(function (event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                posting(url, 'instagram');
             });
-            $('#whatsappLink').click(function(event) {
-                event.preventDefault();  
-                const url = $(this).attr('href');  
-                posting(url, 'whatsapp');  
+            $('#whatsappLink').click(function (event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                posting(url, 'whatsapp');
             });
-            $('#tiktokLink').click(function(event) {
-                event.preventDefault();  
-                const url = $(this).attr('href');  
-                posting(url, 'tiktok');  
+            $('#tiktokLink').click(function (event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                posting(url, 'tiktok');
             });
-            $('#youtubeLink').click(function(event) {
-                event.preventDefault();  
-                const url = $(this).attr('href');  
-                posting(url, 'youtube');  
+            $('#youtubeLink').click(function (event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                posting(url, 'youtube');
             });
-            $('#artikelLink').click(function(event) {
-                event.preventDefault();  
-                const url = $(this).attr('href');  
-                posting(url, 'artikel');  
+            $('#artikelLink').click(function (event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                posting(url, 'artikel');
             });
-            $('#websiteLink').click(function(event) {
-                event.preventDefault();  
-                const url = $(this).attr('href');  
-                posting(url, 'website');  
+            $('#websiteLink').click(function (event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                posting(url, 'website');
             });
-            $('#beritaLink').click(function(event) {
-                event.preventDefault();  
-                const url = $(this).attr('href');  
-                posting(url, 'berita');  
+            $('#beritaLink').click(function (event) {
+                event.preventDefault();
+                const url = $(this).attr('href');
+                posting(url, 'berita');
             });
         });
     </script>

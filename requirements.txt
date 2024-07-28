@@ -13,4 +13,7 @@ pymongo==4.3.3
 python-dotenv==0.21.0
 Werkzeug==2.2.3
 zipp==3.15.0 
-pytz
+Flask-SQLAlchemy==2.5.1
+pymysql==1.0.2
+pytz==2021.1
+SQLAlchemy==1.4.22
